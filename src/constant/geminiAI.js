@@ -14,7 +14,7 @@ const systemInstruction = `Based on the provided user details and optional image
 			{ "text": "Product" }
 		],
 		"image_analysis": "Description of image analysis",
-		"note": "Additional notes or context"
+		"note": "Additional notes or context. (2 lines max)"
 	}
 
 	- **possible_conditions**: List potential conditions based on the input.

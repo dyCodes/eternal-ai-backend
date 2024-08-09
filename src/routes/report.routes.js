@@ -1,7 +1,7 @@
 const express = require('express');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 const { systemInstruction } = require('../constant/geminiAI');
-const { fileToGenerativePart } = require('../utils/fileUtils');
+const { fileToGenerativePart, generatePrompt } = require('../utils/geminiAI.utils');
 const router = express.Router();
 
 // Initialize the generative model
@@ -17,10 +17,16 @@ router.post('/', async (req, res) => {
 	const imageFile = req.files?.image;
 	// console.log('data: ', data);
 
+	// Validate request
+	if (!data.nature || !data.appearance || !data.gender) {
+		return res.status(400).json({ error: 'User details and symptom description are required.' });
+	}
+
 	try {
 		async function run() {
 			// Prepare prompt
-			const prompt = `User details and symptom. Description: ${data.nature} | Appearance: ${data.appearance}  | Gender: ${data.gender}`;
+			const prompt = generatePrompt(data);
+			// console.log('prompt: ', prompt);
 
 			// Prepare image parts if image data is available
 			let imageParts = [];
@@ -35,7 +41,7 @@ router.post('/', async (req, res) => {
 		}
 
 		const output = await run();
-		console.log('output: ', output);
+		// console.log('output: ', output);
 
 		// Return response
 		res.status(200).json(output);
