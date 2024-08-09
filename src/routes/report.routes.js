@@ -14,8 +14,8 @@ const model = genAI.getGenerativeModel({
 
 router.post('/', async (req, res) => {
 	const data = req.body;
+	const imageFile = req.files?.image;
 	// console.log('data: ', data);
-	// console.log('File: ', data.image, data.mimeType);
 
 	try {
 		async function run() {
@@ -24,11 +24,9 @@ router.post('/', async (req, res) => {
 
 			// Prepare image parts if image data is available
 			let imageParts = [];
-			// if (data?.image && data?.mimeType) {
-			// 	imageParts = [fileToGenerativePart(data.image, data.mimeType)];
-			// }
-
-			console.log('imageParts', imageParts);
+			if (imageFile && data?.mimeType) {
+				imageParts = [fileToGenerativePart(imageFile, data.mimeType)];
+			}
 
 			// Generate content
 			const result = await model.generateContent([prompt, ...imageParts]);
