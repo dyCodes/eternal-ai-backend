@@ -1,6 +1,6 @@
 const express = require('express');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
-const { systemInstruction } = require('../constant/geminiAI');
+const { reportSystemInstruction } = require('../constant/geminiAI');
 const { fileToGenerativePart, generatePrompt } = require('../utils/geminiAI.utils');
 const router = express.Router();
 
@@ -9,7 +9,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({
 	model: 'gemini-1.5-flash',
 	generationConfig: { responseMimeType: 'application/json' },
-	systemInstruction: systemInstruction,
+	systemInstruction: reportSystemInstruction,
 });
 
 router.post('/', async (req, res) => {
