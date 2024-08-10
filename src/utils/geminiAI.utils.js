@@ -51,9 +51,8 @@ const generateUserContext = (userData) => {
 
 // Function to generate chat history including user context
 const generateChatHistory = (history, userData) => {
-	let chatHistory = history.slice(2);
 	// Add user context to the chat history
-	chatHistory.unshift(
+	let chatHistory = history.unshift(
 		{
 			role: 'user',
 			parts: [{ text: 'User Context: ' + generateUserContext(userData) }],
