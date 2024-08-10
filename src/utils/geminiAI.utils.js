@@ -48,11 +48,10 @@ const generateUserContext = (userData) => {
 		- Medications: ${userData.medications || 'Not provided'}
 		- Date: ${userData.date || 'Not provided'}`;
 };
-
 // Function to generate chat history including user context
 const generateChatHistory = (history, userData) => {
 	// Add user context to the chat history
-	let chatHistory = history.unshift(
+	history.unshift(
 		{
 			role: 'user',
 			parts: [{ text: 'User Context: ' + generateUserContext(userData) }],
@@ -64,10 +63,7 @@ const generateChatHistory = (history, userData) => {
 	);
 
 	// Remove `id` from each history item
-	chatHistory = chatHistory.map((item) => {
-		const { id, ...rest } = item;
-		return rest;
-	});
+	let chatHistory = history.map(({ id, ...rest }) => rest);
 	return chatHistory;
 };
 
