@@ -29,3 +29,46 @@ Eternal AI aims to:
 - **Frontend**: React/Next.js, Tailwind CSS
 - **Backend**: Node.js/Express
 - **AI Integration**: Google Generative AI (Gemini), providing powerful AI-driven skin condition assessments based on uploaded image and symptom data.
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js
+- npm/yarn
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/dyCodes/eternal-ai-backend.git
+   ```
+
+2. Navigate to the project directory:
+
+   ```bash
+   cd eternal-ai-backend
+   ```
+
+3. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+4. Set up environment variables:
+
+   - Create a `.env` file in the root directory and add your environment variables:
+
+     ```plaintext
+     GEMINI_API_KEY=your_gemini_api_key
+     ```
+
+5. Start the server:
+
+   ```bash
+   npm start
+   ```
+
+   The backend server should now be running on `http://localhost:3000`.
