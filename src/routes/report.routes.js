@@ -7,7 +7,7 @@ const router = express.Router();
 // Initialize the generative model
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({
-	model: 'gemini-1.5-flash',
+	model: 'gemini-1.5-pro',
 	generationConfig: { responseMimeType: 'application/json' },
 	systemInstruction: reportSystemInstruction,
 });
@@ -15,7 +15,6 @@ const model = genAI.getGenerativeModel({
 router.post('/', async (req, res) => {
 	const data = req.body;
 	const imageFile = req.files?.image;
-	// console.log('data: ', data);
 
 	// Validate request
 	if (!data.nature || !data.appearance || !data.duration || !data.age || !data.gender) {
@@ -26,7 +25,6 @@ router.post('/', async (req, res) => {
 		async function run() {
 			// Prepare prompt
 			const prompt = generateUserContext(data);
-			// console.log('prompt: ', prompt);
 
 			// Prepare image parts if image data is available
 			let imageParts = [];
@@ -41,7 +39,6 @@ router.post('/', async (req, res) => {
 		}
 
 		const output = await run();
-		// console.log('output: ', output);
 
 		// Return response
 		res.status(200).json(output);
