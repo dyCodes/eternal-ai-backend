@@ -13,7 +13,6 @@ const model = genAI.getGenerativeModel({
 
 router.post('/', async (req, res) => {
 	const data = req.body;
-	console.log('data: ', data);
 
 	// Validate request
 	if (!data.message) {
@@ -24,7 +23,6 @@ router.post('/', async (req, res) => {
 		async function run() {
 			const message = data.message;
 			const chatHistory = generateChatHistory(data.history, data.userData);
-			console.log('formattedHistory: ', chatHistory);
 
 			const chat = model.startChat({
 				history: chatHistory,
@@ -37,7 +35,6 @@ router.post('/', async (req, res) => {
 		}
 
 		const output = await run();
-		console.log('output: ', output);
 
 		// Return response
 		res.status(200).json({ result: output });
